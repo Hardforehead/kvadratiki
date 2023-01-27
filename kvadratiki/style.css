@@ -1,0 +1,39 @@
+html {
+    height: 99.1%;
+}
+body {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.title {
+    font-family: "Roboto";
+    font-weight: 700;
+    font-size: 50px;
+    margin-bottom: 50px;
+}
+.arena {
+    display: flex;
+    height: 600px;
+    width: 600px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+}
+.antagonist,
+.protagonist {
+    height: 100px;
+    width: 100px;
+    margin: 100px;
+    border: 2px solid;
+}
+
+.antagonist {
+    border: 3px solid rgb(198, 0, 0);
+}
+.protagonist {
+    border: 3px solid rgb(0, 171, 0);
+}
