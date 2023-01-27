@@ -1,5 +1,6 @@
 html {
-    height: 99.1%;
+    height: 100%;
+    overflow: hidden;
 }
 body {
     display: flex;
@@ -12,6 +13,7 @@ body {
     font-family: "Roboto";
     font-weight: 700;
     font-size: 50px;
+    text-transform: uppercase;
     margin-bottom: 50px;
 }
 .arena {
@@ -21,14 +23,14 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: solid;
+    border: solid rgb(108, 83, 52);
 }
 .antagonist,
 .protagonist {
+    box-sizing: border-box;
     height: 100px;
     width: 100px;
     margin: 100px;
-    border: 2px solid;
 }
 
 .antagonist {
