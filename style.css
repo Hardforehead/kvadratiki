@@ -28,6 +28,9 @@ body {
 .antagonist,
 .protagonist {
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100px;
     width: 100px;
     margin: 100px;
@@ -38,4 +41,39 @@ body {
 }
 .protagonist {
     border: 3px solid rgb(0, 171, 0);
+}
+
+.bullet {
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgb(162, 122, 0);
+    transition: 0.5s;
+}
+.attack_button {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(113deg, #F9804B 1.49%, #FE9013 101%);
+    border-radius: 50px;
+    border: none;
+    margin-top: 30px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 140%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.attack_button:hover {
+    box-shadow: 0px 0px 10px 3px rgb(8, 227, 0);
+}
+.attack_button:active {
+    transform: scale(0.95);
+}
+.hidden {
+    visibility: hidden;
 }
