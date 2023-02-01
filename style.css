@@ -2,22 +2,26 @@ html {
     height: 100%;
     overflow: hidden;
 }
+
 body {
     display: flex;
     min-height: 100%;
     flex-direction: column;
+    font-family: "Roboto";
     justify-content: center;
     align-items: center;
 }
+
 .title {
-    font-family: "Roboto";
     font-weight: 700;
-    font-size: 50px;
+    font-size: 70px;
     text-transform: uppercase;
     margin-bottom: 50px;
 }
+
 .arena {
     display: flex;
+    position: relative;
     height: 600px;
     width: 600px;
     flex-direction: column;
@@ -25,6 +29,7 @@ body {
     align-items: center;
     border: solid rgb(108, 83, 52);
 }
+
 .antagonist,
 .protagonist {
     box-sizing: border-box;
@@ -39,22 +44,25 @@ body {
 .antagonist {
     border: 3px solid rgb(198, 0, 0);
 }
+
 .protagonist {
     border: 3px solid rgb(0, 171, 0);
 }
 
 .bullet {
     box-sizing: border-box;
+    display: flex;
     width: 30px;
     height: 30px;
     border: 3px solid rgb(162, 122, 0);
-    transition: 0.5s;
+    z-index: 0;
 }
-.attack_button {
+
+.attack_button,
+.reload_button {
     width: 100px;
     height: 100px;
     background: linear-gradient(113deg, #F9804B 1.49%, #FE9013 101%);
-    border-radius: 50px;
     border: none;
     margin-top: 30px;
     font-family: 'Roboto';
@@ -68,12 +76,77 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
-.attack_button:hover {
+
+.reload_button {
+    margin-left: 20px;
+    width: 150px;
+}
+
+.attack_button:hover,
+.reload_button:hover {
     box-shadow: 0px 0px 10px 3px rgb(8, 227, 0);
 }
-.attack_button:active {
+
+.attack_button:active,
+.reload_button:active {
     transform: scale(0.95);
 }
+
 .hidden {
+    transition: 0.3s;
     visibility: hidden;
+}
+
+.protagonist_quote,
+.antagonist_quote {
+    display: flex;
+    position: absolute;
+    font-size: 30px;
+    left: 400px;
+}
+
+.antagonist_quote {
+    top: 100px;
+}
+
+.protagonist_quote {
+    top: 400px;
+}
+
+@media (max-width: 900px) {
+    .title {
+        font-size: 30px;
+    }
+    .arena {
+        height: 300px;
+        width: 300px;
+    }
+
+    .bullet {
+        width: 15px;
+        height: 15px;
+    }
+
+    .antagonist,
+    .protagonist {
+        height: 50px;
+        width: 50px;
+        margin: 50px;
+    }
+
+    .protagonist_quote,
+    .antagonist_quote {
+        display: flex;
+        position: absolute;
+        font-size: 15px;
+        left: 200px;
+    }
+
+    .antagonist_quote {
+        top: 50px;
+    }
+
+    .protagonist_quote {
+        top: 200px;
+    }
 }
