@@ -4,8 +4,8 @@ const bullet = document.querySelector('.bullet');
 const antagonistQuote = document.querySelector('.antagonist_quote');
 const protagonistQuote = document.querySelector('.protagonist_quote');
 
-let snd1 = new Audio("../assets/shoot.mp3");
-let snd2 = new Audio("../assets/reload.mp3");
+let snd1 = new Audio("assets/shoot.mp3");
+let snd2 = new Audio("assets/reload.mp3");
 let bulletCount = 1;
 function shoot() {
     bullet.style = 'transform: translate(0, -800%)';
