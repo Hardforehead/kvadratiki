@@ -48,7 +48,25 @@ body {
 .protagonist {
     border: 3px solid rgb(0, 171, 0);
 }
-
+@keyframes x {
+    to {
+      transform: translate(0, 2%);
+    }
+ }
+ @keyframes y {
+    to {
+      transform: translate(0, -0.5%);
+    }
+ }
+.cell {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgb(0, 0, 0);
+}
 .bullet {
     box-sizing: border-box;
     display: flex;
@@ -93,7 +111,7 @@ body {
 }
 
 .hidden {
-    transition: 0.3s;
+    transition: 0.2s;
     visibility: hidden;
 }
 
@@ -121,7 +139,10 @@ body {
         height: 300px;
         width: 300px;
     }
-
+    .cell {
+        width: 17px;
+        height: 17px;
+    }
     .bullet {
         width: 15px;
         height: 15px;
