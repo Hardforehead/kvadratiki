@@ -26,12 +26,26 @@ function shoot() {
     curhp--;
     hp.style = `width: ${curhp / maxhp * 100}%`;
     hpCount.innerHTML = `${curhp} / ${maxhp}`;
+    if (curhp === 3) {
+        antagonistQuote.innerHTML = 'сук пздц';
+        protagonistQuote.innerHTML = 'получи сук';
+
+    }
+    if (curhp === 2) {
+        antagonistQuote.innerHTML = 'не нада бля';
+        protagonistQuote.innerHTML = 'нада бля';
+    }
+    if (curhp === 1) {
+        antagonistQuote.innerHTML = 'умираю бля';
+        protagonistQuote.innerHTML = 'да бля';
+    }
     if (curhp === 0) {
         restartButton.classList.remove ('hidden');
         win.classList.remove ('hidden');
         snd3.currentTime = 0;
         snd3.play();
         antagonistQuote.innerHTML = 'бля умер';
+        protagonistQuote.innerHTML = 'земля пухом бля';
     }
     snd1.currentTime = 0;
     snd1.play();
@@ -45,6 +59,10 @@ function reload() {
     snd2.currentTime = 0;
     snd2.play();
     bulletCount = 1;
+    if (curhp === 0) {
+        restartButton.classList.remove ('hidden');
+        win.classList.remove ('hidden');
+    }
 }
 
 attackButton.addEventListener('click', () => {
@@ -62,6 +80,10 @@ restartButton.addEventListener('click', () => {
     curhp = maxhp;
     hp.style = `width: ${curhp / maxhp * 100}%`;
     hpCount.innerHTML = `${curhp} / ${maxhp}`;
+    antagonistQuote.classList.add ('hidden');
+    protagonistQuote.classList.add ('hidden');
+    antagonistQuote.innerHTML = 'ай блять';
+    protagonistQuote.innerHTML = 'на нахуй';
     restartButton.classList.add ('hidden');
     win.classList.add ('hidden');
 })
