@@ -5,10 +5,17 @@ const antagonistQuote = document.querySelector('.antagonist_quote');
 const protagonistQuote = document.querySelector('.protagonist_quote');
 const protagonist = document.querySelector('.protagonist');
 const antagonist = document.querySelector('.antagonist');
+const hp = document.querySelector('.hp');
+const hpCount = document.querySelector('.hp_count');
+const restartButton = document.querySelector('.restart_button');
+const win = document.querySelector('.win');
 
 let snd1 = new Audio("assets/shoot.mp3");
 let snd2 = new Audio("assets/reload.mp3");
+let snd3 = new Audio("assets/winsound.mp3")
 let bulletCount = 1;
+let maxhp = 5;
+let curhp = 5;
 function shoot() {
     let a = Math.round(Math.random() * 100);
     bullet.style = `transform: translate(${a % 2 === 0 ? a : -a}%, -900%)`;
@@ -16,6 +23,16 @@ function shoot() {
     bullet.classList.add('hidden');
     antagonistQuote.classList.remove('hidden');
     protagonistQuote.classList.remove('hidden');
+    curhp--;
+    hp.style = `width: ${curhp / maxhp * 100}%`;
+    hpCount.innerHTML = `${curhp} / ${maxhp}`;
+    if (curhp === 0) {
+        restartButton.classList.remove ('hidden');
+        win.classList.remove ('hidden');
+        snd3.currentTime = 0;
+        snd3.play();
+        antagonistQuote.innerHTML = 'бля умер';
+    }
     snd1.currentTime = 0;
     snd1.play();
 }
@@ -31,7 +48,7 @@ function reload() {
 }
 
 attackButton.addEventListener('click', () => {
-    if (bulletCount > 0) {
+    if (bulletCount > 0 && curhp > 0) {
         shoot();
         bulletCount--;
     }
@@ -40,4 +57,11 @@ reloadButton.addEventListener('click', () => {
     if (bulletCount < 1) {
         reload();
     }
+})
+restartButton.addEventListener('click', () => {
+    curhp = maxhp;
+    hp.style = `width: ${curhp / maxhp * 100}%`;
+    hpCount.innerHTML = `${curhp} / ${maxhp}`;
+    restartButton.classList.add ('hidden');
+    win.classList.add ('hidden');
 })

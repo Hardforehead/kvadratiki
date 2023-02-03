@@ -16,7 +16,7 @@ body {
     font-weight: 700;
     font-size: 70px;
     text-transform: uppercase;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .arena {
@@ -29,7 +29,30 @@ body {
     align-items: center;
     border: solid rgb(108, 83, 52);
 }
-
+.hp_bar {
+    display: flex;
+    position: absolute;
+    top: 0;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 100%;
+    border: 1px solid black;
+}
+.hp {
+    display: flex;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(255, 144, 144);
+    transition: 0.2s;
+}
+.hp_count {
+    display: flex;
+    z-index: 2;
+}
 .antagonist,
 .protagonist {
     box-sizing: border-box;
@@ -44,7 +67,13 @@ body {
 .antagonist {
     border: 3px solid rgb(198, 0, 0);
 }
-
+.win {
+    position: absolute;
+    font-size: 90px;
+    color: green;
+    text-transform: uppercase;
+    font-weight: 800;
+}
 .protagonist {
     border: 3px solid rgb(0, 171, 0);
 }
@@ -75,9 +104,12 @@ body {
     border: 3px solid rgb(162, 122, 0);
     z-index: 0;
 }
-
+.controls {
+    user-select: none;
+}
 .attack_button,
-.reload_button {
+.reload_button,
+.restart_button {
     width: 100px;
     height: 100px;
     background: linear-gradient(113deg, #F9804B 1.49%, #FE9013 101%);
@@ -96,17 +128,25 @@ body {
 }
 
 .reload_button {
-    margin-left: 20px;
     width: 150px;
+}
+.attack_button {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.restart_button {
+    width: 110px;
 }
 
 .attack_button:hover,
-.reload_button:hover {
+.reload_button:hover,
+.restart_button:hover {
     box-shadow: 0px 0px 10px 3px rgb(8, 227, 0);
 }
 
 .attack_button:active,
-.reload_button:active {
+.reload_button:active,
+.restart_button:active {
     transform: scale(0.95);
 }
 
@@ -139,6 +179,10 @@ body {
         height: 300px;
         width: 300px;
     }
+    .hp_bar {
+        height: 15px;
+        font-size: 13px;
+    }
     .cell {
         width: 17px;
         height: 17px;
@@ -169,5 +213,22 @@ body {
 
     .protagonist_quote {
         top: 200px;
+    }
+    .attack_button,
+    .reload_button,
+    .restart_button {
+        font-size: 12px;
+        height: 50px;
+        width: 80px;
+    }
+    .reload_button {
+        width: 100px;
+    }
+    .attack_button {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .restart_button {
+        width: 80px;
     }
 }
