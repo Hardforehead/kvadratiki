@@ -155,6 +155,10 @@ body {
     visibility: hidden;
 }
 
+.hidden2 {
+    visibility: hidden;
+}
+
 .protagonist_quote,
 .antagonist_quote {
     display: flex;

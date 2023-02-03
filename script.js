@@ -21,8 +21,8 @@ function shoot() {
     bullet.style = `transform: translate(${a % 2 === 0 ? a : -a}%, -900%)`;
     protagonist.style = 'animation: x 0.3s cubic-bezier(0,20,1,20) 1';
     bullet.classList.add('hidden');
-    antagonistQuote.classList.remove('hidden');
-    protagonistQuote.classList.remove('hidden');
+    antagonistQuote.classList.remove('hidden2');
+    protagonistQuote.classList.remove('hidden2');
     curhp--;
     hp.style = `width: ${curhp / maxhp * 100}%`;
     hpCount.innerHTML = `${curhp} / ${maxhp}`;
@@ -54,8 +54,8 @@ function reload() {
     bullet.style = 'transform: translate(0, 0)';
     bullet.classList.remove('hidden');
     protagonist.style = 'animation: 0';
-    antagonistQuote.classList.add('hidden');
-    protagonistQuote.classList.add('hidden');
+    antagonistQuote.classList.add('hidden2');
+    protagonistQuote.classList.add('hidden2');
     snd2.currentTime = 0;
     snd2.play();
     bulletCount = 1;
@@ -80,8 +80,8 @@ restartButton.addEventListener('click', () => {
     curhp = maxhp;
     hp.style = `width: ${curhp / maxhp * 100}%`;
     hpCount.innerHTML = `${curhp} / ${maxhp}`;
-    antagonistQuote.classList.add ('hidden');
-    protagonistQuote.classList.add ('hidden');
+    antagonistQuote.classList.add ('hidden2');
+    protagonistQuote.classList.add ('hidden2');
     antagonistQuote.innerHTML = 'ай блять';
     protagonistQuote.innerHTML = 'на нахуй';
     restartButton.classList.add ('hidden');
