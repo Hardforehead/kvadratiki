@@ -12,7 +12,8 @@ const win = document.querySelector('.win');
 
 let snd1 = new Audio("assets/shoot.mp3");
 let snd2 = new Audio("assets/reload.mp3");
-let snd3 = new Audio("assets/winsound.mp3")
+let snd3 = new Audio("assets/winsound.mp3");
+let snd4 = new Audio("assets/restart.mp3");
 let bulletCount = 1;
 let maxhp = 5;
 let curhp = 5;
@@ -86,4 +87,6 @@ restartButton.addEventListener('click', () => {
     protagonistQuote.innerHTML = 'на нахуй';
     restartButton.classList.add ('hidden');
     win.classList.add ('hidden');
+    snd4.currentTime = 0;
+    snd4.play();
 })
