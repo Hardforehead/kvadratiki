@@ -27,6 +27,7 @@ function shoot() {
     curhp--;
     hp.style = `width: ${curhp / maxhp * 100}%`;
     hpCount.innerHTML = `${curhp} / ${maxhp}`;
+    setTimeout(impact, 200);
     if (curhp === 3) {
         antagonistQuote.innerHTML = 'сук пздц';
         protagonistQuote.innerHTML = 'получи сук';
@@ -55,6 +56,7 @@ function reload() {
     bullet.style = 'transform: translate(0, 0)';
     bullet.classList.remove('hidden');
     protagonist.style = 'animation: 0';
+    antagonist.style = 'animation: 0';
     antagonistQuote.classList.add('hidden2');
     protagonistQuote.classList.add('hidden2');
     snd2.currentTime = 0;
@@ -65,7 +67,9 @@ function reload() {
         win.classList.remove ('hidden');
     }
 }
-
+function impact() {
+    antagonist.style = 'animation: y 0.3s cubic-bezier(0,20,1,20) 1';
+}
 attackButton.addEventListener('click', () => {
     if (bulletCount > 0 && curhp > 0) {
         shoot();
