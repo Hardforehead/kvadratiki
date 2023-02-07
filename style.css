@@ -53,6 +53,31 @@ body {
     display: flex;
     z-index: 2;
 }
+.prot_hp_bar {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 100%;
+    border: 1px solid black;
+}
+.prot_hp {
+    display: flex;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(155, 255, 144);
+    transition: 0.2s;
+}
+.prot_hp_count {
+    display: flex;
+    z-index: 2;
+}
+
 .antagonist,
 .protagonist {
     box-sizing: border-box;
@@ -67,15 +92,15 @@ body {
 .antagonist {
     border: 3px solid rgb(198, 0, 0);
 }
+.protagonist {
+    border: 3px solid rgb(0, 171, 0);
+}
 .win {
     position: absolute;
     font-size: 90px;
     color: green;
     text-transform: uppercase;
     font-weight: 800;
-}
-.protagonist {
-    border: 3px solid rgb(0, 171, 0);
 }
 @keyframes x {
     to {
@@ -141,7 +166,7 @@ body {
 .attack_button:hover,
 .reload_button:hover,
 .restart_button:hover {
-    box-shadow: 0px 0px 10px 3px rgb(8, 227, 0);
+    box-shadow: 0px 0px 10px 3px rgb(227, 0, 0);
 }
 
 .attack_button:active,
@@ -192,6 +217,7 @@ body {
         height: 17px;
     }
     .bullet {
+        border: 2px solid rgb(162, 122, 0);
         width: 15px;
         height: 15px;
     }
@@ -201,6 +227,12 @@ body {
         height: 50px;
         width: 50px;
         margin: 50px;
+    }
+    .antagonist {
+        border: 2px solid rgb(198, 0, 0);
+    }
+    .protagonist {
+        border: 2px solid rgb(0, 171, 0);
     }
 
     .protagonist_quote,

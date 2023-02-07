@@ -20,7 +20,7 @@ let curhp = 5;
 function shoot() {
     let a = Math.round(Math.random() * 100);
     bullet.style = `transform: translate(${a % 2 === 0 ? a : -a}%, -900%)`;
-    protagonist.style = 'animation: x 0.3s cubic-bezier(0,20,1,20) 1';
+    protagonist.style = 'animation: x 0.2s cubic-bezier(0,20,1,20) 1';
     bullet.classList.add('hidden');
     antagonistQuote.classList.remove('hidden2');
     protagonistQuote.classList.remove('hidden2');
@@ -68,7 +68,7 @@ function reload() {
     }
 }
 function impact() {
-    antagonist.style = 'animation: y 0.3s cubic-bezier(0,20,1,20) 1';
+    antagonist.style = 'animation: y 0.2s cubic-bezier(0,20,1,20) 1';
 }
 attackButton.addEventListener('click', () => {
     if (bulletCount > 0 && curhp > 0) {
