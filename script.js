@@ -18,9 +18,11 @@ let snd3 = new Audio("assets/winsound.mp3");
 let snd4 = new Audio("assets/restart.mp3");
 let bulletCount = 1;
 let maxhp = 5;
-let curhp = 5;
+let curhp = maxhp;
 let prmaxhp = 5;
-let prcurhp = 5;
+let prcurhp = prmaxhp;
+hpCount.innerHTML = `${curhp} / ${maxhp}`;
+prhpCount.innerHTML = `${prcurhp} / ${prmaxhp}`;
 function shoot() {
     let a = Math.round(Math.random() * 100);
     let b = Math.round(Math.random() * 100);
@@ -37,7 +39,7 @@ function shoot() {
     hp.style = `width: ${curhp / maxhp * 100}%`;
     prhp.style = `width: ${prcurhp / prmaxhp * 100}%`;
     hpCount.innerHTML = `${curhp} / ${maxhp}`;
-    prhpCount.innerHTML = `${curhp} / ${maxhp}`;
+    prhpCount.innerHTML = `${prcurhp} / ${prmaxhp}`;
     if (curhp === 3) {
         antagonistQuote.innerHTML = 'сук пздц';
         protagonistQuote.innerHTML = 'получи сук';
@@ -53,6 +55,10 @@ function shoot() {
     }
     if (curhp === 0) {
         restartButton.classList.remove('hidden');
+        if (prcurhp === 0) {
+            win.innerHTML = 'nichya';
+            win.style.color = 'orange';
+        }
         win.classList.remove('hidden');
         snd3.currentTime = 0;
         snd3.play();
@@ -101,6 +107,7 @@ restartButton.addEventListener('click', () => {
     hp.style = `width: ${curhp / maxhp * 100}%`;
     prhp.style = `width: ${prcurhp / prmaxhp * 100}%`;
     hpCount.innerHTML = `${curhp} / ${maxhp}`;
+    prhpCount.innerHTML = `${prcurhp} / ${prmaxhp}`;
     antagonistQuote.classList.add('hidden2');
     protagonistQuote.classList.add('hidden2');
     antagonistQuote.innerHTML = 'ай блять';
