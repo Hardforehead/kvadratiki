@@ -207,12 +207,15 @@ body {
 }
 
 .hidden {
-    transition: 0.2s;
+    transition: 0.4s;
     visibility: hidden;
 }
 
 .hidden2 {
     visibility: hidden;
+}
+.misfire {
+    transform: rotate(30deg);
 }
 
 .protagonist_quote,
