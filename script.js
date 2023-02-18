@@ -11,17 +11,24 @@ const prhp = document.querySelector('.prot_hp');
 const prhpCount = document.querySelector('.prot_hp_count');
 const restartButton = document.querySelector('.restart_button');
 const win = document.querySelector('.win');
-
+const shad = document.querySelector('.shad');
+const popup = document.querySelector('.popup');
+const store = document.querySelector('.store_button');
+const item = document.querySelector('.item');
+const money = document.querySelector('.money');
 let snd1 = new Audio("assets/shoot.mp3");
 let snd2 = new Audio("assets/reload.mp3");
 let snd3 = new Audio("assets/winsound.mp3");
 let snd4 = new Audio("assets/restart.mp3");
 let snd5 = new Audio("assets/rikoshet.mp3");
+let score = 5;
 let bulletCount = 1;
 let maxhp = 5;
 let curhp = maxhp;
 let prmaxhp = 5;
 let prcurhp = prmaxhp;
+let bbye = 1;
+let prdmg = 1;
 hpCount.innerHTML = `${curhp} / ${maxhp}`;
 prhpCount.innerHTML = `${prcurhp} / ${prmaxhp}`;
 function shoot() {
@@ -38,10 +45,8 @@ function shoot() {
     protagonist.style = `animation: x 0.3s cubic-bezier(0,20,1,20) ${d === 1 ? 1 : 2}`;
     antagonist.style = `animation: y 0.3s cubic-bezier(0,20,1,20) ${c === 1 ? 1 : 2}`;
     
-    //antagonistQuote.classList.remove('hidden2');
-    //protagonistQuote.classList.remove('hidden2');
     if (c !== 1) {
-        curhp--;
+        curhp < prdmg ? curhp = 0 : curhp -= prdmg;
         hp.style = `width: ${curhp / maxhp * 100}%`;
         hpCount.innerHTML = `${curhp} / ${maxhp}`;
         
@@ -58,24 +63,13 @@ function shoot() {
         snd5.play();
     }
     
-    /*if (curhp === 3) {
-        antagonistQuote.innerHTML = 'сук пздц';
-        protagonistQuote.innerHTML = 'получи сук';
-
-    }
-    if (curhp === 2) {
-        antagonistQuote.innerHTML = 'не нада бля';
-        protagonistQuote.innerHTML = 'нада бля';
-    }
-    if (curhp === 1) {
-        antagonistQuote.innerHTML = 'умираю бля';
-        protagonistQuote.innerHTML = 'да бля';
-    }*/
     if (curhp === 0 || prcurhp === 0) {
         restartButton.classList.remove('hidden');
         if (curhp === 0) {
             win.innerHTML = 'победа';
             win.style.color = 'green';
+            score += 5;
+            money.innerHTML = `${score} деняк`;
             snd3.currentTime = 0;
             snd3.play();
         }
@@ -86,12 +80,10 @@ function shoot() {
         if (prcurhp === 0 && curhp === 0) {
             win.innerHTML = 'ничья';
             win.style.color = 'orange';
+            score += 2;
+            money.innerHTML = `${score} деняк`;
         }
         win.classList.remove('hidden');
-        /*antagonistQuote.innerHTML = 'бля умер';
-        prcurhp === 0 ?
-            protagonistQuote.innerHTML = 'бля и я умер' :
-            protagonistQuote.innerHTML = 'земля пухом бля';*/
     }
     snd1.currentTime = 0;
     snd1.play();
@@ -121,12 +113,12 @@ attackButton.addEventListener('click', () => {
         shoot();
         bulletCount--;
     }
-})
+});
 reloadButton.addEventListener('click', () => {
     if (bulletCount < 1) {
         reload();
     }
-})
+});
 restartButton.addEventListener('click', () => {
     curhp = maxhp;
     prcurhp = prmaxhp;
@@ -134,12 +126,31 @@ restartButton.addEventListener('click', () => {
     prhp.style = `width: ${prcurhp / prmaxhp * 100}%`;
     hpCount.innerHTML = `${curhp} / ${maxhp}`;
     prhpCount.innerHTML = `${prcurhp} / ${prmaxhp}`;
-    //antagonistQuote.classList.add('hidden2');
-    //protagonistQuote.classList.add('hidden2');
-    //antagonistQuote.innerHTML = 'ай блять';
-    //protagonistQuote.innerHTML = 'на нахуй';
     restartButton.classList.add('hidden');
     win.classList.add('hidden');
     snd4.currentTime = 0;
     snd4.play();
+});
+
+store.addEventListener('click', () => {
+    popup.style = 'top: 100px'; 
+    shad.style.cssText =`background-color: rgba(20, 20, 20, 0.4);
+    visibility: visible;
+    z-index: 1;`;
+});
+shad.addEventListener('click', () => {
+    popup.style = 'top: -700px;'; 
+    shad.style.cssText =`background-color: rgba(20, 20, 20, 0);
+            visibility: hidden;
+            z-index: 1;`;
+
+    a = 0;
+});
+item.addEventListener('click', () => {
+    prdmg = 2;
+    item.style.background = 'lightgreen';
+    bullet[1].classList.add('bullet2');
+    score -= 5;
+    money.innerHTML = `${score} деняк`;
+
 })

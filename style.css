@@ -11,11 +11,40 @@ body {
     font-family: "Roboto";
     justify-content: center;
     align-items: center;
-    background: linear-gradient(0deg, rgba(165,225,255,1) 0%, rgba(243,246,243,1) 50%, rgba(240,212,225,1) 100%);
+    background: linear-gradient(0deg, rgba(165, 225, 255, 1) 0%, rgba(243, 246, 243, 1) 50%, rgba(240, 212, 225, 1) 100%);
 }
+
+.shad {
+    visibility: hidden;
+    position: absolute;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(20, 20, 20, 0);
+    z-index: 0;
+    transition: 0.3s;
+
+}
+.popup {
+    display: flex;
+    position: absolute;
+    align-self: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    top: -700px;
+    width: 600px;
+    height: 600px;
+    background: rgb(244, 244, 244);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    z-index: 6;
+    transition: 0.3s;
+  }
 .cloud {
     position: absolute;
-    top: 10%;
+    top: 12%;
     left: 10%;
     height: 20%;
     width: 30%;
@@ -24,31 +53,40 @@ body {
     animation: z 60s ease-in-out infinite alternate;
 
 }
+
 @keyframes z {
     to {
-      transform: translate(170%);
+        transform: translate(170%);
     }
- }
- .cloud:hover::after { 
-    content: attr(data-title); 
-    position: absolute;
-    left: 20%; 
-    top: 20%;
-    z-index: 1; 
-    background: rgba(255,255,230,0.9); 
-    font-size: 14px; 
-    font-weight: 600;
-    padding: 5px 10px; 
-    border: 1px solid #333;  
 }
+
+.cloud:hover::after {
+    content: attr(data-title);
+    position: absolute;
+    left: 20%;
+    top: 20%;
+    z-index: 1;
+    background: rgba(255, 255, 230, 0.9);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border: 1px solid #333;
+}
+
 .title {
     font-weight: 700;
     font-size: 70px;
     text-transform: uppercase;
-    margin-bottom: 30px;
+    margin-bottom: 0;
     z-index: 1;
 }
-
+.money {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 20px;
+    z-index: 1;
+}
 .arena {
     display: flex;
     position: relative;
@@ -60,6 +98,7 @@ body {
     border: solid rgb(108, 83, 52);
     background-color: white;
 }
+
 .hp_bar {
     display: flex;
     position: absolute;
@@ -71,6 +110,7 @@ body {
     width: 100%;
     border: 1px solid black;
 }
+
 .hp {
     display: flex;
     position: absolute;
@@ -80,10 +120,12 @@ body {
     background-color: rgb(255, 161, 161);
     transition: 0.2s;
 }
+
 .hp_count {
     display: flex;
     z-index: 2;
 }
+
 .prot_hp_bar {
     display: flex;
     position: absolute;
@@ -95,6 +137,7 @@ body {
     width: 100%;
     border: 1px solid black;
 }
+
 .prot_hp {
     display: flex;
     position: absolute;
@@ -104,6 +147,7 @@ body {
     background-color: rgb(155, 255, 144);
     transition: 0.2s;
 }
+
 .prot_hp_count {
     display: flex;
     z-index: 2;
@@ -123,9 +167,11 @@ body {
 .antagonist {
     border: 3px solid rgb(198, 0, 0);
 }
+
 .protagonist {
     border: 3px solid rgb(0, 171, 0);
 }
+
 .win {
     position: absolute;
     font-size: 90px;
@@ -133,25 +179,30 @@ body {
     text-transform: uppercase;
     font-weight: 800;
 }
+
 @keyframes x {
     to {
-      transform: translate(0, 2%);
+        transform: translate(0, 2%);
     }
- }
- @keyframes y {
+}
+
+@keyframes y {
     to {
-      transform: translate(0, -2%);
+        transform: translate(0, -2%);
     }
- }
-.cell {
+}
+
+.ant_cell,
+.prot_cell {
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     border: 1px solid rgb(0, 0, 0);
 }
+
 .bullet {
     box-sizing: border-box;
     display: flex;
@@ -160,17 +211,52 @@ body {
     border: 3px solid rgb(162, 122, 0);
     z-index: 0;
 }
+.bullet2 {
+    box-sizing: border-box;
+    display: flex;
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgb(162, 122, 0);
+    background-color: rgb(162, 122, 0);
+    z-index: 0;
+}
+.item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor: pointer;
+    height: 50px;
+    width: 100%;
+}
+.item:hover {
+    background-color: beige;
+}
+.items {
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+}
+.desc,
+.price,
+.money {
+    font-size: 20px;
+}
 .controls {
     user-select: none;
 }
+
 .attack_button,
 .reload_button,
-.restart_button {
+.restart_button,
+.store_button,
+.level_button {
     width: 100px;
-    height: 100px;
+    height: 60px;
     background: linear-gradient(113deg, #F9804B 1.49%, #FE9013 101%);
     border: none;
-    margin-top: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
@@ -180,29 +266,36 @@ body {
     text-transform: uppercase;
     color: #FFFFFF;
     cursor: pointer;
+    z-index: 2;
     transition: 0.3s;
 }
 
 .reload_button {
     width: 150px;
 }
+
 .attack_button {
     margin-left: 20px;
     margin-right: 20px;
 }
+
 .restart_button {
     width: 110px;
 }
 
 .attack_button:hover,
 .reload_button:hover,
-.restart_button:hover {
+.restart_button:hover,
+.store_button:hover,
+.level_button:hover {
     box-shadow: 0px 0px 10px 3px rgb(227, 0, 0);
 }
 
 .attack_button:active,
 .reload_button:active,
-.restart_button:active {
+.restart_button:active,
+.store_button:active,
+.level_button:active {
     transform: scale(0.95);
 }
 
@@ -214,6 +307,7 @@ body {
 .hidden2 {
     visibility: hidden;
 }
+
 .misfire {
     transform: rotate(30deg);
 }
@@ -238,33 +332,43 @@ body {
     .title {
         font-size: 30px;
     }
+
     .arena {
         height: 300px;
         width: 300px;
     }
+
     .hp_bar {
         height: 15px;
         font-size: 13px;
     }
-    .cell {
-        width: 17px;
-        height: 17px;
+
+    .ant_cell,
+    .prot_cell {
+        width: 19px;
+        height: 19px;
     }
+
     .bullet {
-        border: 2px solid rgb(162, 122, 0);
+        border: 1px solid rgb(162, 122, 0);
         width: 15px;
         height: 15px;
     }
-
+    .bullet2 {
+        width: 15px;
+        height: 15px;
+    }
     .antagonist,
     .protagonist {
         height: 50px;
         width: 50px;
         margin: 50px;
     }
+
     .antagonist {
         border: 2px solid rgb(198, 0, 0);
     }
+
     .protagonist {
         border: 2px solid rgb(0, 171, 0);
     }
@@ -284,24 +388,43 @@ body {
     .protagonist_quote {
         top: 200px;
     }
+
     .attack_button,
     .reload_button,
-    .restart_button {
+    .restart_button,
+    .store_button,
+    .level_button {
         font-size: 12px;
         height: 50px;
         width: 80px;
     }
+
     .reload_button {
         width: 100px;
     }
+
     .attack_button {
         margin-left: 10px;
         margin-right: 10px;
     }
+
     .restart_button {
         width: 80px;
     }
+
     .win {
         font-size: 60px;
+    }
+    .popup {
+        width: 300px;
+        height: 600px;
+      }
+    .desc,
+    .price,
+    .money {
+        font-size: 14px;
+    }
+    .items {
+        width: 300px;
     }
 }
