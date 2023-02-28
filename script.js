@@ -17,6 +17,7 @@ const store = document.querySelector('.store_button');
 const item = document.querySelector('.item');
 const money = document.querySelector('.money');
 const bullet2 = document.querySelector('.bullet2');
+const level = document.querySelector('.level_button');
 let shootSnd = new Audio("assets/shoot.mp3");
 let reloadSnd = new Audio("assets/reload.mp3");
 let winSnd = new Audio("assets/winsound.mp3");
@@ -24,7 +25,7 @@ let restartSnd = new Audio("assets/restart.mp3");
 let rikoshetSnd = new Audio("assets/rikoshet.mp3");
 let buySnd = new Audio("assets/buy.mp3");
 let failSnd = new Audio("assets/fail.mp3");
-let score = 200;
+let score = 5;
 let bulletCount = 1;
 let maxhp = 5;
 let curhp = maxhp;
@@ -33,6 +34,8 @@ let prcurhp = prmaxhp;
 let bbye = 1;
 let prdmg = 1;
 let bulletBorder = 4;
+let lvl = 1;
+level.innerHTML = `Уровень ${lvl}`;
 money.innerHTML = `${score} деняк`;
 hpCount.innerHTML = `${curhp} / ${maxhp}`;
 prhpCount.innerHTML = `${prcurhp} / ${prmaxhp}`;
@@ -47,8 +50,8 @@ function shoot() {
     bullet[1].classList.add('hidden');
     bullet[0].classList.add('hidden');
 
-    protagonist.style = `animation: x 0.3s cubic-bezier(0,20,1,20) ${d === 1 ? 1 : 2}`;
-    antagonist.style = `animation: y 0.3s cubic-bezier(0,20,1,20) ${c === 1 ? 1 : 2}`;
+    protagonist.style.animation = `x 0.3s cubic-bezier(0,20,1,20) ${d === 1 ? 1 : 2}`;
+    antagonist.style.animation = `y 0.3s cubic-bezier(0,20,1,20) ${c === 1 ? 1 : 2}`;
 
     if (c !== 1) {
         curhp < prdmg ? curhp = 0 : curhp -= prdmg;
@@ -75,6 +78,10 @@ function shoot() {
             win.style.color = 'green';
             score += 5;
             money.innerHTML = `${score} деняк`;
+            maxhp +=5;
+            lvl++;
+            level.innerHTML = `Уровень ${lvl}`;
+            antagonist.style.border = `${2 + lvl}px solid rgb(198, 0, 0)`; 
             winSnd.currentTime = 0;
             winSnd.play();
         }
@@ -100,8 +107,8 @@ function reload() {
     bullet[1].classList.remove('hidden');
     bullet[0].style.transform = 'translate(0, 0)';
     bullet[0].classList.remove('hidden');
-    protagonist.style = 'animation: 0';
-    antagonist.style = 'animation: 0';
+    protagonist.style.animation = '0';
+    antagonist.style.animation = '0';
     //antagonistQuote.classList.add('hidden2');
     //protagonistQuote.classList.add('hidden2');
     reloadSnd.currentTime = 0;
@@ -154,7 +161,7 @@ shad.addEventListener('click', () => {
     a = 0;
 });
 item.addEventListener('click', () => {
-    if (score > 0) {
+    if (score - 5 >= 0) {
         prdmg += 1;
         buySnd.currentTime = 0;
         buySnd.play();
