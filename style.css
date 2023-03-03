@@ -27,9 +27,11 @@ body {
     transition: 0.3s;
 
 }
-.popup {
+.popup,
+.popup2 {
     display: flex;
     position: absolute;
+    box-sizing: border-box;
     align-self: center;
     justify-content: flex-start;
     flex-direction: column;
@@ -38,10 +40,16 @@ body {
     width: 600px;
     height: 600px;
     background: rgb(244, 244, 244);
+    border: #FE9013 5px solid;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     z-index: 6;
     transition: 0.3s;
   }
+.popup2 {
+    padding: 40px;
+    font-size: 30px;
+    align-items: flex-start;
+}
 .cloud {
     position: absolute;
     top: 12%;
@@ -85,6 +93,9 @@ body {
     align-items: flex-end;
     justify-content: center;
     margin-bottom: 20px;
+    color: yellow;
+    text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+    font-size: 28px;
     z-index: 1;
 }
 .arena {
@@ -162,6 +173,7 @@ body {
     height: 100px;
     width: 100px;
     margin: 100px;
+    cursor: pointer;
 }
 
 .antagonist {
@@ -238,8 +250,7 @@ body {
     width: 600px;
 }
 .desc,
-.price,
-.money {
+.price {
     font-size: 20px;
 }
 .controls {
@@ -359,6 +370,7 @@ body {
     .bullet2 {
         width: 15px;
         height: 15px;
+        border: 2px solid rgb(162, 122, 0);
     }
     .antagonist,
     .protagonist {
@@ -417,7 +429,8 @@ body {
     .win {
         font-size: 60px;
     }
-    .popup {
+    .popup,
+    .popup2 {
         width: 300px;
         height: 600px;
       }

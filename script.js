@@ -13,11 +13,13 @@ const restartButton = document.querySelector('.restart_button');
 const win = document.querySelector('.win');
 const shad = document.querySelector('.shad');
 const popup = document.querySelector('.popup');
+const popup2 = document.querySelector('.popup2');
 const store = document.querySelector('.store_button');
 const item = document.querySelector('.item');
 const money = document.querySelector('.money');
 const bullet2 = document.querySelector('.bullet2');
 const level = document.querySelector('.level_button');
+const prdamage = document.querySelector('.damage');
 let shootSnd = new Audio("assets/shoot.mp3");
 let reloadSnd = new Audio("assets/reload.mp3");
 let winSnd = new Audio("assets/winsound.mp3");
@@ -27,9 +29,10 @@ let buySnd = new Audio("assets/buy.mp3");
 let failSnd = new Audio("assets/fail.mp3");
 let score = 5;
 let bulletCount = 1;
-let maxhp = 5;
+let maxhp = 3;
+let anthpadd = 3
 let curhp = maxhp;
-let prmaxhp = 5;
+let prmaxhp = 3;
 let prcurhp = prmaxhp;
 let bbye = 1;
 let prdmg = 1;
@@ -73,19 +76,23 @@ function shoot() {
 
     if (curhp === 0 || prcurhp === 0) {
         restartButton.classList.remove('hidden');
-        if (curhp === 0) {
+        if (curhp === 0 && prcurhp > 0) {
             win.innerHTML = 'победа';
             win.style.color = 'green';
             score += 5;
             money.innerHTML = `${score} деняк`;
-            maxhp +=5;
+            maxhp += anthpadd;
             lvl++;
             level.innerHTML = `Уровень ${lvl}`;
-            antagonist.style.border = `${2 + lvl}px solid rgb(198, 0, 0)`; 
+            if (document.documentElement.clientWidth < 900) {
+                antagonist.style.border = `${2 + 0.5 * lvl}px solid rgb(198, 0, 0)`;
+            } else {
+                antagonist.style.border = `${2 + lvl}px solid rgb(198, 0, 0)`;
+            }
             winSnd.currentTime = 0;
             winSnd.play();
         }
-        if (prcurhp === 0) {
+        if (prcurhp === 0 && curhp > 0) {
             win.innerHTML = 'поражение';
             win.style.color = 'red';
             score += 1;
@@ -154,21 +161,27 @@ store.addEventListener('click', () => {
 });
 shad.addEventListener('click', () => {
     popup.style = 'top: -700px;';
+    popup2.style = 'top: -700px;';
     shad.style.cssText = `background-color: rgba(20, 20, 20, 0);
             visibility: hidden;
             z-index: 1;`;
-
-    a = 0;
 });
 item.addEventListener('click', () => {
     if (score - 5 >= 0) {
         prdmg += 1;
+        prdamage.innerHTML = `Урон: ${prdmg}`;
         buySnd.currentTime = 0;
         buySnd.play();
         bulletBorder += 1;
         if (bulletBorder < 16) {
-            bullet2.style = `border: ${bulletBorder}px solid rgb(162, 122, 0);`;
-            bullet[1].style = `border: ${bulletBorder}px solid rgb(162, 122, 0);`;
+            if (document.documentElement.clientWidth < 900) {
+                bullet2.style = `border: ${bulletBorder * 0.5}px solid rgb(162, 122, 0);`;
+                bullet[1].style = `border: ${bulletBorder * 0.5}px solid rgb(162, 122, 0);`; 
+            } else {
+                bullet2.style = `border: ${bulletBorder}px solid rgb(162, 122, 0);`;
+                bullet[1].style = `border: ${bulletBorder}px solid rgb(162, 122, 0);`;
+            }
+
         }
         score -= 5;
         money.innerHTML = `${score} деняк`;
@@ -177,4 +190,10 @@ item.addEventListener('click', () => {
         failSnd.play();
     }
 
+})
+protagonist.addEventListener('click', () => {
+    popup2.style = 'top: 100px';
+    shad.style.cssText = `background-color: rgba(20, 20, 20, 0.4);
+    visibility: visible;
+    z-index: 1;`;
 })
