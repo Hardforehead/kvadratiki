@@ -167,7 +167,7 @@ shad.addEventListener('click', () => {
             z-index: 1;`;
 });
 item.addEventListener('click', () => {
-    if (score - 5 >= 0) {
+    if (score - 5 >= 0 && prdmg < 12) {
         prdmg += 1;
         prdamage.innerHTML = `Урон: ${prdmg}`;
         buySnd.currentTime = 0;

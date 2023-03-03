@@ -1,11 +1,11 @@
 html {
     height: 100%;
-    overflow: hidden;
 }
 
 body {
     display: flex;
     min-height: 100%;
+    margin: 0;
     width: 100%;
     flex-direction: column;
     font-family: "Roboto";
@@ -93,9 +93,10 @@ body {
     align-items: flex-end;
     justify-content: center;
     margin-bottom: 20px;
-    color: yellow;
-    text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+    color: green;
+    text-shadow: 1px 1px 2px rgb(255, 255, 255), 0 0 1em rgb(255, 255, 255), 0 0 0.2em rgb(255, 255, 255);
     font-size: 28px;
+    font-weight: 700;
     z-index: 1;
 }
 .arena {
@@ -264,7 +265,7 @@ body {
 .level_button {
     width: 100px;
     height: 60px;
-    background: linear-gradient(113deg, #F9804B 1.49%, #FE9013 101%);
+    background: rgb(255, 132, 0);
     border: none;
     margin-top: 20px;
     margin-bottom: 20px;
