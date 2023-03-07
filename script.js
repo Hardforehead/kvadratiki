@@ -16,10 +16,13 @@ const popup = document.querySelector('.popup');
 const popup2 = document.querySelector('.popup2');
 const store = document.querySelector('.store_button');
 const item = document.querySelector('.item');
+const item1 = document.querySelector('.item1');
+const prcell = document.querySelectorAll('.prot_cell');
 const money = document.querySelector('.money');
 const bullet2 = document.querySelector('.bullet2');
 const level = document.querySelector('.level_button');
 const prdamage = document.querySelector('.damage');
+const miss = document.querySelector('.miss');
 let shootSnd = new Audio("assets/shoot.mp3");
 let reloadSnd = new Audio("assets/reload.mp3");
 let winSnd = new Audio("assets/winsound.mp3");
@@ -27,7 +30,7 @@ let restartSnd = new Audio("assets/restart.mp3");
 let rikoshetSnd = new Audio("assets/rikoshet.mp3");
 let buySnd = new Audio("assets/buy.mp3");
 let failSnd = new Audio("assets/fail.mp3");
-let score = 5;
+let score = 10;
 let bulletCount = 1;
 let maxhp = 3;
 let anthpadd = 3
@@ -38,6 +41,8 @@ let bbye = 1;
 let prdmg = 1;
 let bulletBorder = 4;
 let lvl = 1;
+let autoreload = false;
+let missChance = 0;
 level.innerHTML = `Уровень ${lvl}`;
 money.innerHTML = `${score} деняк`;
 hpCount.innerHTML = `${curhp} / ${maxhp}`;
@@ -45,9 +50,9 @@ prhpCount.innerHTML = `${prcurhp} / ${prmaxhp}`;
 function shoot() {
     let a = Math.round(Math.random() * 100);
     let b = Math.round(Math.random() * 100);
-    let c = Math.round(Math.random() * 3);
+    let c = Math.round(Math.random() * 3) + missChance;
     let d = Math.round(Math.random() * 3);
-    rikoshetSnd.volume = 0.5;
+    rikoshetSnd.volume = 0.3;
     bullet[1].style.transform = `translate(${a % 2 === 0 ? a : -a}%, -900%)`;
     bullet[0].style.transform = `translate(${b % 2 === 0 ? b : -b}%, 900%)`;
     bullet[1].classList.add('hidden');
@@ -79,6 +84,7 @@ function shoot() {
         if (curhp === 0 && prcurhp > 0) {
             win.innerHTML = 'победа';
             win.style.color = 'green';
+            restartButton.innerHTML = 'Далее';
             score += 5;
             money.innerHTML = `${score} деняк`;
             maxhp += anthpadd;
@@ -95,35 +101,40 @@ function shoot() {
         if (prcurhp === 0 && curhp > 0) {
             win.innerHTML = 'поражение';
             win.style.color = 'red';
+            restartButton.innerHTML = 'Рестарт';
             score += 1;
             money.innerHTML = `${score} деняк`;
         }
         if (prcurhp === 0 && curhp === 0) {
             win.innerHTML = 'ничья';
             win.style.color = 'orange';
+            restartButton.innerHTML = 'Рестарт';
             score += 3;
             money.innerHTML = `${score} деняк`;
         }
         win.classList.remove('hidden');
     }
+    shootSnd.volume = 0.4;
     shootSnd.currentTime = 0;
     shootSnd.play();
 }
 function reload() {
-    bullet[1].style.transform = 'translate(0, 0)';
-    bullet[1].classList.remove('hidden');
-    bullet[0].style.transform = 'translate(0, 0)';
-    bullet[0].classList.remove('hidden');
-    protagonist.style.animation = '0';
-    antagonist.style.animation = '0';
-    //antagonistQuote.classList.add('hidden2');
-    //protagonistQuote.classList.add('hidden2');
-    reloadSnd.currentTime = 0;
-    reloadSnd.play();
-    bulletCount = 1;
-    if (curhp === 0) {
-        restartButton.classList.remove('hidden');
-        win.classList.remove('hidden');
+    if (bulletCount < 1) {
+        bullet[1].style.transform = 'translate(0, 0)';
+        bullet[1].classList.remove('hidden');
+        bullet[0].style.transform = 'translate(0, 0)';
+        bullet[0].classList.remove('hidden');
+        protagonist.style.animation = '0';
+        antagonist.style.animation = '0';
+        //antagonistQuote.classList.add('hidden2');
+        //protagonistQuote.classList.add('hidden2');
+        reloadSnd.currentTime = 0;
+        reloadSnd.play();
+        bulletCount = 1;
+        if (curhp === 0) {
+            restartButton.classList.remove('hidden');
+            win.classList.remove('hidden');
+        }
     }
 }
 function impact() {
@@ -133,12 +144,13 @@ attackButton.addEventListener('click', () => {
     if (bulletCount > 0 && curhp > 0 && prcurhp > 0) {
         shoot();
         bulletCount--;
+        if (autoreload) {
+            setTimeout(reload, 600);
+        }
     }
 });
 reloadButton.addEventListener('click', () => {
-    if (bulletCount < 1) {
-        reload();
-    }
+    reload();
 });
 restartButton.addEventListener('click', () => {
     curhp = maxhp;
@@ -172,11 +184,12 @@ item.addEventListener('click', () => {
         prdamage.innerHTML = `Урон: ${prdmg}`;
         buySnd.currentTime = 0;
         buySnd.play();
+        item.title = `Урон: +${prdmg}`;
         bulletBorder += 1;
         if (bulletBorder < 16) {
             if (document.documentElement.clientWidth < 900) {
                 bullet2.style = `border: ${bulletBorder * 0.5}px solid rgb(162, 122, 0);`;
-                bullet[1].style = `border: ${bulletBorder * 0.5}px solid rgb(162, 122, 0);`; 
+                bullet[1].style = `border: ${bulletBorder * 0.5}px solid rgb(162, 122, 0);`;
             } else {
                 bullet2.style = `border: ${bulletBorder}px solid rgb(162, 122, 0);`;
                 bullet[1].style = `border: ${bulletBorder}px solid rgb(162, 122, 0);`;
@@ -196,4 +209,20 @@ protagonist.addEventListener('click', () => {
     shad.style.cssText = `background-color: rgba(20, 20, 20, 0.4);
     visibility: visible;
     z-index: 1;`;
+})
+item1.addEventListener('click', () => {
+    if (score - 20 >= 0) {
+        prcell[0].style.border = '2px solid black';
+        prcell[1].style.border = '2px solid black';
+        missChance = 2;
+        buySnd.currentTime = 0;
+        buySnd.play();
+        score -= 20;
+        money.innerHTML = `${score} деняк`;
+        miss.innerHTML = `Промах: 0%`;
+    } else {
+        failSnd.currentTime = 0;
+        failSnd.play();
+    }
+
 })
