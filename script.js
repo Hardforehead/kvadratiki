@@ -17,12 +17,14 @@ const popup2 = document.querySelector('.popup2');
 const store = document.querySelector('.store_button');
 const item = document.querySelector('.item');
 const item1 = document.querySelector('.item1');
+const item2 = document.querySelector('.item2');
 const prcell = document.querySelectorAll('.prot_cell');
 const money = document.querySelector('.money');
 const bullet2 = document.querySelector('.bullet2');
 const level = document.querySelector('.level_button');
 const prdamage = document.querySelector('.damage');
 const miss = document.querySelector('.miss');
+const shadow = document.querySelector('.shadow');
 let shootSnd = new Audio("assets/shoot.mp3");
 let reloadSnd = new Audio("assets/reload.mp3");
 let winSnd = new Audio("assets/winsound.mp3");
@@ -30,7 +32,7 @@ let restartSnd = new Audio("assets/restart.mp3");
 let rikoshetSnd = new Audio("assets/rikoshet.mp3");
 let buySnd = new Audio("assets/buy.mp3");
 let failSnd = new Audio("assets/fail.mp3");
-let score = 10;
+let score = 30;
 let bulletCount = 1;
 let maxhp = 3;
 let anthpadd = 3
@@ -211,13 +213,31 @@ protagonist.addEventListener('click', () => {
     z-index: 1;`;
 })
 item1.addEventListener('click', () => {
-    if (score - 20 >= 0) {
+    if (score - 20 >= 0 && missChance !== 2) {
         prcell[0].style.border = '2px solid black';
         prcell[1].style.border = '2px solid black';
+        prcell[2].style.border = '2px solid black';
         missChance = 2;
         buySnd.currentTime = 0;
         buySnd.play();
         score -= 20;
+        money.innerHTML = `${score} деняк`;
+        miss.innerHTML = `Промах: 0%`;
+    } else {
+        failSnd.currentTime = 0;
+        failSnd.play();
+    }
+
+})
+item2.addEventListener('click', () => {
+    if (score - 5 >= 0 && autoreload === false) {
+        prcell[0].classList.add('shadow');
+        prcell[1].classList.add('shadow');
+        prcell[2].classList.add('shadow');
+        autoreload = true;
+        buySnd.currentTime = 0;
+        buySnd.play();
+        score -= 5;
         money.innerHTML = `${score} деняк`;
         miss.innerHTML = `Промах: 0%`;
     } else {
