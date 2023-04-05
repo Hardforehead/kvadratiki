@@ -32,7 +32,7 @@ let restartSnd = new Audio("assets/restart.mp3");
 let rikoshetSnd = new Audio("assets/rikoshet.mp3");
 let buySnd = new Audio("assets/buy.mp3");
 let failSnd = new Audio("assets/fail.mp3");
-let score = 30;
+let score = 15;
 let bulletCount = 1;
 let maxhp = 3;
 let anthpadd = 3
@@ -46,7 +46,7 @@ let lvl = 1;
 let autoreload = false;
 let missChance = 0;
 level.innerHTML = `Уровень ${lvl}`;
-money.innerHTML = `${score} деняк`;
+money.innerHTML = `${score} $`;
 hpCount.innerHTML = `${curhp} / ${maxhp}`;
 prhpCount.innerHTML = `${prcurhp} / ${prmaxhp}`;
 function shoot() {
@@ -88,7 +88,7 @@ function shoot() {
             win.style.color = 'green';
             restartButton.innerHTML = 'Далее';
             score += 5;
-            money.innerHTML = `${score} деняк`;
+            money.innerHTML = `${score} $`;
             maxhp += anthpadd;
             lvl++;
             level.innerHTML = `Уровень ${lvl}`;
@@ -105,14 +105,14 @@ function shoot() {
             win.style.color = 'red';
             restartButton.innerHTML = 'Рестарт';
             score += 1;
-            money.innerHTML = `${score} деняк`;
+            money.innerHTML = `${score} $`;
         }
         if (prcurhp === 0 && curhp === 0) {
             win.innerHTML = 'ничья';
             win.style.color = 'orange';
             restartButton.innerHTML = 'Рестарт';
             score += 3;
-            money.innerHTML = `${score} деняк`;
+            money.innerHTML = `${score} $`;
         }
         win.classList.remove('hidden');
     }
@@ -199,7 +199,7 @@ item.addEventListener('click', () => {
 
         }
         score -= 5;
-        money.innerHTML = `${score} деняк`;
+        money.innerHTML = `${score} $`;
     } else {
         failSnd.currentTime = 0;
         failSnd.play();
@@ -221,7 +221,7 @@ item1.addEventListener('click', () => {
         buySnd.currentTime = 0;
         buySnd.play();
         score -= 20;
-        money.innerHTML = `${score} деняк`;
+        money.innerHTML = `${score} $`;
         miss.innerHTML = `Промах: 0%`;
     } else {
         failSnd.currentTime = 0;
@@ -238,7 +238,7 @@ item2.addEventListener('click', () => {
         buySnd.currentTime = 0;
         buySnd.play();
         score -= 5;
-        money.innerHTML = `${score} деняк`;
+        money.innerHTML = `${score} $`;
         miss.innerHTML = `Промах: 0%`;
     } else {
         failSnd.currentTime = 0;
