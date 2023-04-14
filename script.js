@@ -239,7 +239,6 @@ item2.addEventListener('click', () => {
         buySnd.play();
         score -= 5;
         money.innerHTML = `${score} $`;
-        miss.innerHTML = `Промах: 0%`;
     } else {
         failSnd.currentTime = 0;
         failSnd.play();
